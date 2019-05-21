@@ -1,0 +1,17 @@
+stages:
+  - build_docker_image
+BuildForDeployment:
+  only:
+    - master
+  stage: build_docker_image
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - echo "" >> ./example.env
+    - echo "UPDATE_DB=true" >> ./example.env
+    - echo "" >> ./example.env
+    - echo "BUILD_VERSION=`date +%m%d_%H%M`(Production)" >> ./example.env
+    - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
+    - docker build -t $DOCKER_REGISTRY/mc256/tasker_tracker/image:latest .
+    - docker push $DOCKER_REGISTRY/mc256/tasker_tracker/image:latest
