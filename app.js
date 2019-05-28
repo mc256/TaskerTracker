@@ -14,6 +14,7 @@ const app = express();
     await database.initialize((!!process.env.UPDATE_DB) ? process.env.UPDATE_DB.toUpperCase() === 'TRUE' : false);
 
     // HTTP Server
+    app.set('trust proxy', 'loopback, linklocal, uniquelocal');
     app.use(logger('dev'));
     app.use(express.json());
     app.use(express.urlencoded({extended: false}));
