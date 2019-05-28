@@ -19,6 +19,7 @@ const app = express();
     app.use(express.json());
     app.use(express.urlencoded({extended: false}));
     app.use(cookieParser());
+    app.set('trust proxy', 'loopback, linklocal, uniquelocal');
     app.use(express.static(path.join(__dirname, 'public')));
     app.use('/', require('./routes/index'));
 

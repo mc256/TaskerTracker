@@ -6,5 +6,7 @@ module.exports = {
         name: Sequelize.STRING(64),
         ip: Sequelize.STRING(39),
         timestamp: Sequelize.DATE
+    },{
+        timestamps: false
     })
 };
