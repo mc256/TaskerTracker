@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:10-slim
 
 # Create working directory
 WORKDIR /usr/src/app
